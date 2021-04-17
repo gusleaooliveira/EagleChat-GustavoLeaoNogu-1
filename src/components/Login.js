@@ -19,7 +19,7 @@ function Login(){
             <button className="btn btn-info" data-testid="sigin-anon" onClick={() => {
               firebase.auth().signInAnonymously();
             }}>
-              <FontAwesomeIcon icon={faSignOutAlt} /> Login
+              <FontAwesomeIcon icon={faSignOutAlt} /> Login   
             </button>
             <button className="btn btn-info" onClick={() => {
               firebase.auth.signOut();
