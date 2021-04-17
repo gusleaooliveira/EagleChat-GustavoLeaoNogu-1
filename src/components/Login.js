@@ -19,13 +19,29 @@ function Login(){
             <button className="btn btn-info" data-testid="sigin-anon" onClick={() => {
               firebase.auth().signInAnonymously();
             }}>
-
               <FontAwesomeIcon icon={faSignOutAlt} /> Login
             </button>
-            <button className="btn btn-info">
-
+            <button className="btn btn-info" onClick={() => {
+              firebase.auth.signOut();
+            }}>
               <FontAwesomeIcon icon={faSignOutAlt} /> Logout
             </button>
+
+            <FirebaseAuthConsomer>
+              {({isSignedIn, user, providerId}) => {
+                return  <pre style={{height: 300, overflow: "auto"}}>
+                          {JSON.stringfy({isSignedIn, user, providerId}, null, 2)}
+                        </pre>
+              }}
+            </FirebaseAuthConsomer>
+            <IfFirebaseAuthed>
+              {() => { return <p>Você está conectado!</p>; }}
+            </IfFirebaseAuthed>
+            <IfFirebaseAuthedAnd filter={({providerId}) => providerId !== "anonymous"}>
+              {({providerId}) => {
+                return <p>Voce está conectado com: {providerId}</p>;
+              }}
+            </IfFirebaseAuthedAnd>
           </FirebaseAuthProvider>
 }
 
